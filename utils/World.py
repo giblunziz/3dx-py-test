@@ -4,8 +4,8 @@ import json
 class World:
     __objects = []
 
-    def __init__(self):
-        pass
+    def __init__(self, debug=False):
+        self.__debug = debug
 
     def get_world(self):
         group = {
@@ -14,13 +14,18 @@ class World:
         }
         return group
 
-    def append(self, object):
-        self.__objects.append(object)
+    def append(self, fragment):
+        self.__objects.append(fragment)
 
     def save(self, filename='output/test.world'):
         fichier = open(filename, 'w')
         fichier.write(self.__as_json())
         fichier.close()
+
+        if self.__debug:
+            fichier = open(filename + ".json", 'w')
+            fichier.write(self.__as_json())
+            fichier.close()
 
     def dump(self):
         print(self.__as_json())

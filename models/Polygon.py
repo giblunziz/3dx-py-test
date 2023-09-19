@@ -14,8 +14,8 @@ class Polygon:
 
         for segment in range(self.segments):
             px = round(math.cos(self.angle * segment) * self.radius, 2)
-            py = round(math.sin(self.angle * segment) * self.radius, 2)
-            pz = 0.
+            py = 0.
+            pz = round(math.sin(self.angle * segment) * self.radius, 2)
             P = [px, py, pz]
 
             rx = 0.
@@ -23,8 +23,8 @@ class Polygon:
             rz = 0.
             R = [rx, ry, rz]
 
-            sx = 1.
-            sy = round(self.length, 2)
+            sx = round(self.length, 2)
+            sy = 1.
             sz = 1.
             S = [sx, sy, sz]
 
