@@ -9,7 +9,9 @@ class Polygon:
         self.angle = math.radians(360 / self.segments)
         self.length = round(2 * math.sin(self.angle / 2) * self.radius, 6)
 
-    def test(self):
+    def __get_segments(self):
+        result = []
+
         for segment in range(self.segments):
             px = round(math.cos(self.angle * segment) * self.radius, 2)
             py = round(math.sin(self.angle * segment) * self.radius, 2)
@@ -35,7 +37,20 @@ class Polygon:
                 "s": S,
                 "c": C
             }
-            print(f"Box {segment}: {box}")
+            result.append(box)
+        return result
+
+    def poly(self, grouped=True):
+        segments = self.__get_segments()
+        if grouped:
+            result = {
+                "n": "group",
+                "objects": segments
+            }
+        else:
+            result = segments
+
+        return result
 
     def dump(self):
         print(f"Segments: {self.segments}")

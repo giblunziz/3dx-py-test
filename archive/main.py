@@ -94,7 +94,7 @@ def get_data():
 
 
 def write_file():
-    fichier = open('test.world', 'w')
+    fichier = open('../resources/test.world', 'w')
     fichier.write(get_data())
     fichier.close()
 
