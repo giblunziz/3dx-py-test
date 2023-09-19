@@ -1,33 +1,45 @@
 import json
 import math
 
-n = 8
-angle = math.radians(360 / n)
-longueur = 2 * math.sin(angle/2)
-print(n, angle)
+segments=8
+angle = math.radians(360 / segments)
+longueur = 2 * math.sin(angle / 2)
+print(segments, angle)
 
-for i in range(n):
-    px = round(math.cos(angle * i), 2)
-    py = round(math.sin(angle * i), 2)
+
+def getPolyObject(segment, radius):
+    px = round(math.cos(angle * segment), 2)
+    py = round(math.sin(angle * segment), 2)
     pz = 0
     P = [px, py, pz]
 
     rx = 0.
-    ry = round(math.degrees(angle * i),2)
+    ry = round(math.degrees(angle * segment), 2)
     rz = 0.
     R = [rx, ry, rz]
 
     sx = 1.
-    sy = round(longueur,2)
+    sy = round(longueur, 2)
     sz = 1.
-    S = [sx,sy,sz]
+    S = [sx, sy, sz]
 
+    C = [1., 0., .5]
 
     box = {
         "n": "Box",
         "p": P,
         "r": R,
-        "s": S
+        "s": S,
+        "c": C
     }
-    print(json.dumps(box))
+    return box
 
+
+def poly(segments: 8, radius: 10):
+    for i in range(segments):
+        box = getPolyObject(segment=i, radius=radius)
+        print(json.dumps(box))
+
+
+if __name__ == '__main__':
+    poly(8)
