@@ -1,7 +1,9 @@
 import math
 
+from models.AbstractModel import AbstractModel
 
-class Polygon:
+
+class Polygon(AbstractModel):
 
     def __init__(self, segments=8, radius=10):
         self.segments = segments
@@ -16,29 +18,32 @@ class Polygon:
             px = round(math.cos(self.angle * segment) * self.radius, 2)
             py = 0.
             pz = round(math.sin(self.angle * segment) * self.radius, 2)
-            P = [px, py, pz]
+            position = [px, py, pz]
 
             rx = 0.
             ry = round(math.degrees(self.angle * segment), 2)
             rz = 0.
-            R = [rx, ry, rz]
+            rotation = [rx, ry, rz]
 
             sx = round(self.length, 2)
             sy = 1.
             sz = 1.
-            S = [sx, sy, sz]
+            scale = [sx, sy, sz]
 
-            C = [1., 0., .5]
+            color = [1., 0., .5]
 
             box = {
                 "n": "Box",
-                "p": P,
-                "r": R,
-                "s": S,
-                "c": C
+                "p": position,
+                "r": rotation,
+                "s": scale,
+                "c": color
             }
             result.append(box)
         return result
+
+    def get_model(self):
+        return self.poly()
 
     def poly(self, grouped=True):
         segments = self.__get_segments()
