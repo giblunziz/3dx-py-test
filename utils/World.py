@@ -1,4 +1,5 @@
 import json
+import logging
 
 from models.AbstractModel import AbstractModel
 
@@ -36,7 +37,7 @@ class World:
             fichier.close()
 
     def dump(self):
-        print(self.__pretty())
+        logging.info(self.__pretty())
 
     def __pretty(self):
         return json.dumps(self.get_world(), indent=2)

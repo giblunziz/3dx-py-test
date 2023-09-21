@@ -29,17 +29,35 @@ def scale(m: np.ndarray, x=1, y=1, z=1):
 # b = np.array([a,a])
 # print(b)
 
+
+def medians(_shapes):
+    rg = []
+    shapes = _shapes.copy()
+    shapes = np.append(shapes, [shapes[0]], 0)
+
+    print("shape:", shapes.shape[0])
+    for i in range(1, shapes.shape[0]):
+        s = np.median([shapes[i - 1, 0], shapes[i, 0]], axis=0)
+        rg.append(s)
+    return np.array(rg)
+
+
 # Definitions des 3 points du polygone
-a = np.array([10,0])
-b = np.array([-5,8.66])
-c = np.array([-5,-8.66])
+a = np.array([[10, 0, 0], [0, 0, 0], [0, 0, 0], [1, 1, 0]])
+b = np.array([[-5, 0, 8.66], [0, 0, 0], [0, 0, 0], [0, 1, 1]])
+c = np.array([[-5, 0, -8.66], [0, 0, 0], [0, 0, 0], [1, 0, 1]])
+
+positions = np.array([a, b, c])
+print(positions.shape)
+m = medians(positions)
+print(m)
 
 # Calcul des médianes
-ab = np.array([a,b])
-bc = np.array([b,c])
-ca = np.array([c,a])
+ab = np.array([a[0], b[0]])
+bc = np.array([b[0], c[0]])
+ca = np.array([c[0], a[0]])
 
 amx = np.median(ab, axis=0)
 amy = np.median(bc, axis=0)
 amz = np.median(ca, axis=0)
-print(amx, amy, amz)
+print("result", amx, amy, amz)
