@@ -1,5 +1,6 @@
 import json
 import logging
+from utils.dataviz.Dataviz import Dataviz
 
 from models.AbstractModel import AbstractModel
 
@@ -41,3 +42,14 @@ class World:
 
     def __pretty(self):
         return json.dumps(self.get_world(), indent=2)
+
+    def draw(self):
+        """
+        Drawing the model using Matplotlib library
+        :return: nothing
+        """
+
+        dv = Dataviz()
+        dv.draw(self.get_model())
+
+

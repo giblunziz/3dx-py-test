@@ -35,7 +35,6 @@ def medians(_shapes):
     shapes = _shapes.copy()
     shapes = np.append(shapes, [shapes[0]], 0)
 
-    print("shape:", shapes.shape[0])
     for i in range(1, shapes.shape[0]):
         s = np.median([shapes[i - 1, 0], shapes[i, 0]], axis=0)
         rg.append(s)

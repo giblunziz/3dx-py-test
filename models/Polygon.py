@@ -1,5 +1,5 @@
-import math
 import logging
+import math
 
 import numpy as np
 
@@ -12,21 +12,10 @@ class Polygon(AbstractModel):
         self.segments = segments
         self.radius = radius
         self.angle = math.radians(360 / self.segments)
-        self.length = round(2 * math.sin(self.angle / 2) * self.radius , 6)
-
-    def __get_median(self, _shapes):
-        shapes = _shapes.copy()
-        shapes = np.append(shapes, [shapes[0]], 0)
-        _shapes = _shapes.copy()
-
-
-        print("shape:", shapes.shape[0])
-        for i in range(1, shapes.shape[0]):
-            _shapes[i-1,0] = np.median([shapes[i - 1, 0], shapes[i, 0]], axis=0)
-        return _shapes
+        self.length = round(2 * math.sin(self.angle / 2) * self.radius, 6)
 
     def __get_segments(self):
-        lShapes = []
+        l_shapes = []
         for segment in range(self.segments):
             position = np.array([
                 round(math.cos(self.angle * segment) * self.radius, 2),
@@ -39,11 +28,11 @@ class Polygon(AbstractModel):
             color = np.array([1., 1., 1.])
 
             shape = np.array([position, rotation, scale, color])
-            lShapes.append(shape)
+            l_shapes.append(shape)
 
             # box = {"n": "Box", "p": position, "r": rotation, "s": scale, "c": color}
             # result.append(box)
-        self.shapes = self.__get_median(np.array(lShapes))
+        self.shapes = self.medians(np.array(l_shapes))
         logging.debug("self.shapes: %s", self.shapes)
         return self.as_world()
 

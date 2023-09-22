@@ -13,3 +13,6 @@ if __name__ == '__main__':
     # w = world.get_world()
     world.save()
     world.dump()
+
+    world.draw()
+    
